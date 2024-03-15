@@ -36,6 +36,23 @@ end_datetime = pd.to_datetime(end_date)
 
 # Filter data berdasarkan rentang waktu
 filtered_data = all_data_cleaned[(all_data_cleaned['datetime'] >= start_datetime) & (all_data_cleaned['datetime'] <= end_datetime)]
+# Hitung total polutan PM2.5 dan PM10
+total_pm25 = filtered_data['PM2.5'].sum()
+total_pm10 = filtered_data['PM10'].sum()
+
+# Hitung total polutan PM2.5 dan PM10
+mean_pm25 = filtered_data['PM2.5'].mean()
+mean_pm10 = filtered_data['PM10'].mean()
+
+# Tampilkan scorecard
+st.sidebar.markdown('---')
+st.sidebar.header('_Total_ _Polutan_')
+st.sidebar.markdown(f'**PM2.5:** <span style="color:red">{int(total_pm25)} ug/m^3</span>', unsafe_allow_html=True)
+st.sidebar.markdown(f'**PM10:** <span style="color:red">{int(total_pm10)} ug/m^3</span>', unsafe_allow_html=True)
+st.sidebar.header('_Average_ _Polutan_')
+st.sidebar.markdown(f'**PM2.5:** <span style="color:red">{int(total_pm25)} ug/m^3</span>', unsafe_allow_html=True)
+st.sidebar.markdown(f'**PM10:** <span style="color:red">{int(total_pm10)} ug/m^3</span>', unsafe_allow_html=True)
+st.sidebar.markdown('---')
 
 # Plot tren polutan PM2.5 berdasarkan tanggal yang dipilih menggunakan Seaborn
 plt.figure(figsize=(12, 6))
@@ -110,24 +127,6 @@ plt.xticks(rotation=45)
 
 # Tampilkan grafik
 st.pyplot(plt)
-
-# Hitung total polutan PM2.5 dan PM10
-total_pm25 = filtered_data['PM2.5'].sum()
-total_pm10 = filtered_data['PM10'].sum()
-
-# Hitung total polutan PM2.5 dan PM10
-mean_pm25 = filtered_data['PM2.5'].mean()
-mean_pm10 = filtered_data['PM10'].mean()
-
-# Tampilkan scorecard
-st.sidebar.markdown('---')
-st.sidebar.header('_Total_ _Polutan_')
-st.sidebar.markdown(f'**PM2.5:** <span style="color:red">{int(total_pm25)} ug/m^3</span>', unsafe_allow_html=True)
-st.sidebar.markdown(f'**PM10:** <span style="color:red">{int(total_pm10)} ug/m^3</span>', unsafe_allow_html=True)
-st.sidebar.header('_Average_ _Polutan_')
-st.sidebar.markdown(f'**PM2.5:** <span style="color:red">{int(total_pm25)} ug/m^3</span>', unsafe_allow_html=True)
-st.sidebar.markdown(f'**PM10:** <span style="color:red">{int(total_pm10)} ug/m^3</span>', unsafe_allow_html=True)
-st.sidebar.markdown('---')
 
 # Definisikan fungsi untuk membuat heatmap
 def create_heatmap(year):
