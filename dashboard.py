@@ -5,9 +5,6 @@ import streamlit as st
 from babel.numbers import format_currency
 import datetime
 
-# Hilangkan pesan peringatan
-st.set_option('deprecation.showPyplotGlobalUse', False)
-
 sns.set(style='white')
 
 st.write('Nama : Bimantyoso H')
@@ -57,12 +54,12 @@ st.subheader('Rentang Waktu: {} sampai {}'.format(start_date.strftime('%Y-%m-%d'
 st.write('Grafik di bawah ini menunjukkan tren konsentrasi PM2.5 di berbagai stasiun udara selama rentang waktu yang dipilih.')
 
 # Tampilkan grafik
-plt.show()
+st.pyplot(plt)
 
-# Plot tren polutan PM10 berdasarkan tanggal yang dipilih menggunakan Seaborn
+# Plot tren polutan PM2.5 berdasarkan tanggal yang dipilih menggunakan Seaborn
 plt.figure(figsize=(12, 6))
 sns.lineplot(data=filtered_data, x='datetime', y='PM10', hue='station', marker='o')
-plt.title('Tren Konsentrasi PM10 Berdasarkan Tanggal', fontsize=16)
+plt.title('Tren Konsentrasi PM2.5 Berdasarkan Tanggal', fontsize=16)
 plt.xlabel('Tanggal', fontsize=12)
 plt.ylabel('Konsentrasi PM10 (ug/m^3)', fontsize=12)
 plt.xticks(rotation=45)
@@ -76,7 +73,7 @@ st.subheader('Rentang Waktu: {} sampai {}'.format(start_date.strftime('%Y-%m-%d'
 st.write('Grafik di bawah ini menunjukkan tren konsentrasi PM10 di berbagai stasiun udara selama rentang waktu yang dipilih.')
 
 # Tampilkan grafik
-plt.show()
+st.pyplot(plt)
 
 # Plot bar chart perbandingan rata-rata polusi pada ketiga stasiun
 plt.figure(figsize=(10, 6))
@@ -94,7 +91,7 @@ st.write('Diagram batang di bawah ini menunjukkan perbandingan rata-rata polusi 
 plt.xticks(rotation=45)
 
 # Tampilkan grafik
-plt.show()
+st.pyplot(plt)
 
 # Plot bar chart perbandingan rata-rata polusi pada ketiga stasiun
 plt.figure(figsize=(10, 6))
@@ -112,7 +109,7 @@ st.write('Diagram batang di bawah ini menunjukkan perbandingan rata-rata polusi 
 plt.xticks(rotation=45)
 
 # Tampilkan grafik
-plt.show()
+st.pyplot(plt)
 
 # Hitung total polutan PM2.5 dan PM10
 total_pm25 = filtered_data['PM2.5'].sum()
